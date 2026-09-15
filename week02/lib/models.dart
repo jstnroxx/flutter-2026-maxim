@@ -48,13 +48,13 @@ class Book extends LibraryItem with Borrowable {
   final String? description;
 
   const Book({
-    required String title,
-    required int year,
+    required super.title,
+    required super.year,
     required this.pages,
     required this.author,
     required this.genre,
     this.description
-  }) : super(title: title, year: year);
+  });
 
   factory Book.fromJson(Map<String, dynamic> json) {
     return Book(
@@ -102,7 +102,7 @@ class Book extends LibraryItem with Borrowable {
 class Magazine extends LibraryItem {
   final int issue;
 
-  const Magazine({required String title, required int year, required this.issue}) : super(title: title, year: year);
+  const Magazine({required super.title, required super.year, required this.issue});
 
   @override
   String describe() {

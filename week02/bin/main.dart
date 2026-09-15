@@ -1,7 +1,7 @@
-import 'data.dart';
-import 'models.dart';
-import 'catalogue.dart';
-import 'shelf_state.dart';
+import 'package:week02/data.dart';
+import 'package:week02/models.dart';
+import 'package:week02/catalogue.dart';
+import 'package:week02/shelf_state.dart';
 
 void main() {
   final Library someLib = Library(items: rawBooks.map((rawBook) => Book.fromJson(rawBook)).toList());

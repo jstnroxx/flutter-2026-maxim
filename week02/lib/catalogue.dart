@@ -37,7 +37,7 @@ class Library {
 
   List<Book> get recentBooks => items.whereType<Book>().where((book) => book.year > 2010).toList();
 
-  int get averagePages => (items.whereType<Book>().length > 0) ? (items.whereType<Book>().fold(0, (totalPages, book) => totalPages + book.pages) ~/ items.whereType<Book>().length) : 0;
+  int get averagePages => (items.whereType<Book>().isNotEmpty) ? (items.whereType<Book>().fold(0, (totalPages, book) => totalPages + book.pages) ~/ items.whereType<Book>().length) : 0;
   // We don't use reduce here because we need to have initial value specified as 0 in order to accumulate pages.
 
   Map<String, int> get authorStats => items.whereType<Book>().fold(<String, int>{}, (stats, book) => stats..[book.author.name] = (stats[book.author.name] ?? 0) + 1);

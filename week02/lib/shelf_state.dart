@@ -20,10 +20,10 @@ String describe(ShelfState state) {
   return switch (state) {
     Empty() => 'Empty.',
     Ready(books: final books) => 'Ready with ${books.length} books.',
-    Broken(message: final message) => '$message',
+    Broken(message: final message) => message,
   };
 }
 
 ({int count, double avgPages}) statsOf(List<Book> books) {
-  return (count: books.length, avgPages: books.length > 0 ? (books.fold(0, (totalPages, book) => totalPages + book.pages) / books.length) : 0);
+  return (count: books.length, avgPages: books.isNotEmpty ? (books.fold(0, (totalPages, book) => totalPages + book.pages) / books.length) : 0);
 }
