@@ -24,22 +24,37 @@ enum Genre {
   }
 }
 
-class Book {
+abstract class LibraryItem {
   final String title;
   final int year;
+
+  const LibraryItem({required this.title, required this.year});
+
+  String describe();
+
+  bool get isOld => year < 2010;
+}
+
+mixin Borrowable on LibraryItem {
+  String borrowLabel() {
+    return 'Borrowing $title.';
+  }
+}
+
+class Book extends LibraryItem with Borrowable {
   final int pages;
   final Author author;
   final Genre genre;
   final String? description;
 
   const Book({
-    required this.title,
-    required this.year,
+    required String title,
+    required int year,
     required this.pages,
     required this.author,
     required this.genre,
     this.description
-  });
+  }) : super(title: title, year: year);
 
   factory Book.fromJson(Map<String, dynamic> json) {
     return Book(
@@ -77,4 +92,36 @@ class Book {
 
   @override
   String toString() => 'Book($title, $year, $pages, $author, ${genre.label}${description != null ? ", $description" : ""})';
+
+  @override
+  String describe() {
+    return '"$title" of ${genre.label} genre written by $author in $year has $pages pages.';
+  }
+}
+
+class Magazine extends LibraryItem {
+  final int issue;
+
+  const Magazine({required String title, required int year, required this.issue}) : super(title: title, year: year);
+
+  @override
+  String describe() {
+    return 'The "$title"\'s issue is $issue.';
+  }
+}
+
+class Ghost implements LibraryItem {
+  @override
+  final String title;
+
+  @override
+  final int year;
+
+  const Ghost({required this.title, required this.year});
+
+  @override
+  String describe() => 'The "$title" is a ghost library item.';
+
+  @override
+  bool get isOld => year < 2020;
 }
