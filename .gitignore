@@ -7,7 +7,18 @@
 .buildlog/
 .history
 
-
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+secrets.json
+credentials.json
 
 # Flutter repo-specific
 /bin/cache/
@@ -47,6 +58,8 @@ unlinked.ds
 unlinked_spec.ds
 
 # Android related
+android/.idea/
+android/*.iml
 **/android/**/gradle-wrapper.jar
 .gradle/
 **/android/captures/
@@ -56,6 +69,40 @@ unlinked_spec.ds
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
 *.jks
+
+android/.gradle/
+android/local.properties
+android/gradlew
+android/gradlew.bat
+android/gradle/wrapper/gradle-wrapper.jar
+
+android/app/debug/
+android/app/profile/
+android/app/release/
+
+# Signing credentials
+android/key.properties
+android/*.jks
+android/*.keystore
+android/app/*.jks
+android/app/*.keystore
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/dictionaries/
+.idea/shelf/
+
+# VSCode
+.vscode/
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
