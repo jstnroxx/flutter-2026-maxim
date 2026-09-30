@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
     ),
     home: const HomeScreen(),
   );
