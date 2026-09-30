@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'contact_list.dart';
 
 void main() => runApp(const MyApp());
@@ -8,9 +9,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-    theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
+    darkTheme: ThemeData(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.teal,
+        brightness: Brightness.dark,
+      ),
     ),
+    theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal)),
+    themeMode: ThemeMode.system,
     home: const HomeScreen(),
   );
 }

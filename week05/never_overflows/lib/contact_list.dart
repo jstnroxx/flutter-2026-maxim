@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'contacts.dart';
 import 'contact_card.dart';
 
@@ -25,10 +26,7 @@ class ContactList extends StatelessWidget {
               return ContactCard(contact: contacts[index]);
             },
             separatorBuilder: (BuildContext context, int index) {
-              return const Divider(
-                indent: 16,
-                endIndent: 16,
-              );
+              return const Divider(indent: 16, endIndent: 16);
             },
           ),
         ),
