@@ -40,9 +40,7 @@ class _EditScreenState extends State<EditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit student'),
-      ),
+      appBar: AppBar(title: const Text('Edit student')),
       body: PopScope(
         canPop: !_dirty,
         onPopInvokedWithResult: (didPop, _) async {

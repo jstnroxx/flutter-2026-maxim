@@ -5,7 +5,8 @@ class Student {
   final String group;
   final String email;
 
-  Student copyWith({String? name}) => Student(name: name ?? this.name, group: group, email: email);
+  Student copyWith({String? name}) =>
+      Student(name: name ?? this.name, group: group, email: email);
 }
 
 const students = [

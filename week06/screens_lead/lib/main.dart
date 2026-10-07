@@ -17,18 +17,20 @@ class MyApp extends StatelessWidget {
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
     ),
     initialRoute: Routes.students,
-    routes: {
-      Routes.students: (_) => const StudentsScreen(),
-    },
+    routes: {Routes.students: (_) => const StudentsScreen()},
     onGenerateRoute: (RouteSettings settings) {
       switch (settings.name) {
         case '/student':
           final student = settings.arguments as Student;
-          return MaterialPageRoute(builder: (_) => DetailScreen(student: student));
+          return MaterialPageRoute(
+            builder: (_) => DetailScreen(student: student),
+          );
 
         case '/edit':
           final student = settings.arguments as Student;
-          return MaterialPageRoute<String>(builder: (_) => EditScreen(student: student));
+          return MaterialPageRoute<String>(
+            builder: (_) => EditScreen(student: student),
+          );
 
         default:
           return null;

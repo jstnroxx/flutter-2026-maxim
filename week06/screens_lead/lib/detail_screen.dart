@@ -16,7 +16,8 @@ class _DetailScreenState extends State<DetailScreen> {
   late Student _student = widget._student;
 
   Future<void> _edit() async {
-    final name = await Navigator.of(context).pushNamed<String>(Routes.edit, arguments: _student);
+    final name = await Navigator.of(context)
+        .pushNamed<String>(Routes.edit, arguments: _student);
 
     if (name == null || !mounted) return;
 
@@ -30,12 +31,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_student.name),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: _edit,
-          ),
-        ],
+        actions: [IconButton(icon: const Icon(Icons.edit), onPressed: _edit)],
       ),
       body: Column(
         children: [
