@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'students.dart';
+import 'detail_screen.dart';
 
 class StudentsScreen extends StatelessWidget {
   const StudentsScreen({super.key, required this._students});
@@ -23,6 +24,11 @@ class StudentsScreen extends StatelessWidget {
             title: Text(_students[index].name),
             subtitle: Text(_students[index].group),
             trailing: Icon(Icons.chevron_right),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => DetailScreen(student: _students[index]),
+              ));
+            },
           );
         },
       ),
