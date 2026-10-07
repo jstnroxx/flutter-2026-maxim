@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'students.dart';
-import 'detail_screen.dart';
+import 'routes.dart';
 
 class StudentsScreen extends StatelessWidget {
-  const StudentsScreen({super.key, required this._students});
+  const StudentsScreen({super.key});
 
-  final List<Student> _students;
+  final List<Student> _students = students;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,7 @@ class StudentsScreen extends StatelessWidget {
             subtitle: Text(_students[index].group),
             trailing: Icon(Icons.chevron_right),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => DetailScreen(student: _students[index]),
-              ));
+              Navigator.of(context).pushNamed(Routes.student, arguments: _students[index]);
             },
           );
         },

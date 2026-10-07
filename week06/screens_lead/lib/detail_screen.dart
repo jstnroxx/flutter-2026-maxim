@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'students.dart';
-import 'edit_screen.dart';
+import 'routes.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this._student});
@@ -16,9 +16,7 @@ class _DetailScreenState extends State<DetailScreen> {
   late Student _student = widget._student;
 
   Future<void> _edit() async {
-    final name = await Navigator.of(context).push<String>(
-      MaterialPageRoute(builder: (_) => EditScreen(student: _student)),
-    );
+    final name = await Navigator.of(context).pushNamed<String>(Routes.edit, arguments: _student);
 
     if (name == null || !mounted) return;
 
