@@ -137,8 +137,7 @@ class _ShellState extends State<Shell> {
       builder: (dialogContext) => AlertDialog(
         title: const Text('Campus events'),
         content: const Text(
-          'Browse, register for and organise events on campus. '
-          'All data lives in memory.',
+          'Browse, register for and organise events on campus.'
         ),
         actions: [
           TextButton(
@@ -259,8 +258,8 @@ class _ShellState extends State<Shell> {
           label: 'Events',
         ),
         NavigationDestination(
-          icon: Icon(Icons.favorite_border),
-          selectedIcon: Icon(Icons.favorite),
+          icon: Icon(Icons.star_border),
+          selectedIcon: Icon(Icons.star),
           label: 'Favourites',
         ),
         NavigationDestination(

@@ -104,9 +104,9 @@ class EventCard extends StatelessWidget {
                   tooltip: 'Favourite',
                   onPressed: onToggleFavourite,
                   icon: Icon(
-                    event.favourite ? Icons.favorite : Icons.favorite_border,
+                    event.favourite ? Icons.star : Icons.star_border,
                   ),
-                  color: event.favourite ? scheme.error : null,
+                  color: event.favourite ? scheme.primary : null,
                 ),
               ],
             ),

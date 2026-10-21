@@ -88,29 +88,32 @@ class _EventsTabState extends State<EventsTab> {
             ),
           ),
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
+        Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Row(
-            children: [
-              for (final EventCategory? c in <EventCategory?>[
-                null,
-                ...EventCategory.values,
-              ])
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: ChoiceChip(
-                    label: Text(c?.label ?? 'All'),
-                    selected: _category == c,
-                    onSelected: (_) => setState(() => _category = c),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            clipBehavior: Clip.antiAlias,
+            child: Row(
+              children: [
+                for (final EventCategory? c in <EventCategory?>[
+                  null,
+                  ...EventCategory.values,
+                ])
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: ChoiceChip(
+                      label: Text(c?.label ?? 'All'),
+                      selected: _category == c,
+                      onSelected: (_) => setState(() => _category = c),
+                    ),
                   ),
+                FilterChip(
+                  label: const Text('Past'),
+                  selected: _showPast,
+                  onSelected: (value) => setState(() => _showPast = value),
                 ),
-              FilterChip(
-                label: const Text('Past'),
-                selected: _showPast,
-                onSelected: (value) => setState(() => _showPast = value),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         Expanded(
@@ -180,7 +183,7 @@ class FavouritesTab extends StatelessWidget {
 
     if (favourites.isEmpty) {
       return EmptyState(
-        icon: Icons.favorite_border,
+        icon: Icons.star_border,
         message: 'No favourites yet',
         buttonLabel: 'Browse events',
         onPressed: onBrowse,
