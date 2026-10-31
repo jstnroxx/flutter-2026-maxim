@@ -18,11 +18,21 @@ class CartScreen extends StatelessWidget {
                   itemCount: cart.count,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
+                      leading: Text('x${cart.qtyOf(cart.items[index])}'),
                       title: Text(cart.items[index].title),
                       subtitle: Text(cart.items[index].author),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.close),
-                        onPressed: () => cart.remove(cart.items[index]),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.plus_one),
+                            onPressed: () => cart.increment(cart.items[index]),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: () => cart.remove(cart.items[index]),
+                          )
+                        ],
                       ),
                     );
                   },
@@ -32,7 +42,24 @@ class CartScreen extends StatelessWidget {
           ),
           SafeArea(
             top: false,
-            child:  Text('${context.watch<Cart>().total} KZT'),
+            child: Consumer<Cart>(
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.shopping_cart_outlined),
+                  Text('Total: '),
+                ],
+              ),
+              builder: (context, cart, child) {
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    child!,
+                    Text('${cart.total} KZT')
+                  ],
+                );
+              },
+            ),
           ),
         ],
       ),

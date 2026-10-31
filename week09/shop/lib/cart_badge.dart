@@ -7,11 +7,12 @@ class CartBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int count = context.watch<Cart>().count;
-    final int total = context.watch<Cart>().total;
+    debugPrint('badge build');
+
+    final int count = context.select<Cart, int>((cart) => cart.count);
 
     return Badge(
-      label: Text('$count items, $total KZT'),
+      label: Text('$count items'),
       child: IconButton(
         icon: const Icon(Icons.shopping_cart),
         onPressed: () => Navigator.of(context).pushNamed('/cart'),

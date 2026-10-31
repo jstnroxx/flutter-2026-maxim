@@ -11,3 +11,7 @@ returns:\
 "Tried to listen to a value exposed with provider, from
 outside of the widget tree."
 
+# Level 4
+CartBadge rebuilds with "watch()": 3.\
+CartBadge rebuilds with "select()": 1.
+
