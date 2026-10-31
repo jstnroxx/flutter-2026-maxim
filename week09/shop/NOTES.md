@@ -1,0 +1,6 @@
+# Level 1
+When passing down the total value of the cart from the
+owner above down to the badge, it required mutation of 2
+constructors: CartBadge (cart_badge.dart), and BooksScreen
+(books_screen.dart), main.dart was also touched, when I passed
+the total value inside the route call.
