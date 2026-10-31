@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'models/book.dart';
+import 'package:provider/provider.dart';
+import 'models/cart.dart';
 
 class CartScreen extends StatelessWidget {
-  final List<Book> items;
-  final void Function(Book) onRemove;
-
-  const CartScreen({super.key, required this.items, required this.onRemove});
+  const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,23 +12,27 @@ class CartScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(items[index].title),
-                  subtitle: Text(items[index].author),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => onRemove(items[index]),
-                  ),
+            child: Consumer<Cart>(
+              builder: (context, cart, _) {
+                return ListView.builder(
+                  itemCount: cart.count,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text(cart.items[index].title),
+                      subtitle: Text(cart.items[index].author),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () => cart.remove(cart.items[index]),
+                      ),
+                    );
+                  },
                 );
               },
             ),
           ),
           SafeArea(
             top: false,
-            child:  Text('${items.fold(0, (sum, book) => sum + book.price)} KZT'),
+            child:  Text('${context.watch<Cart>().total} KZT'),
           ),
         ],
       ),

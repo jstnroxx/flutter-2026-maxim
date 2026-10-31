@@ -4,3 +4,10 @@ owner above down to the badge, it required mutation of 2
 constructors: CartBadge (cart_badge.dart), and BooksScreen
 (books_screen.dart), main.dart was also touched, when I passed
 the total value inside the route call.
+
+# Level 3
+context.read\<Cart\>() on a method instead of context.watch\<Cart\>()
+returns:\
+"Tried to listen to a value exposed with provider, from
+outside of the widget tree."
+
