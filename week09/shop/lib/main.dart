@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'books_screen.dart';
 import 'cart_screen.dart';
 import 'models/cart.dart';
 
 void main() {
-  return runApp(ChangeNotifierProvider(
-      create: (_) => Cart(),
-      child: const Shell(),
-    )
+  return runApp(
+    ChangeNotifierProvider(create: (_) => Cart(), child: const Shell()),
   );
 }
 
@@ -24,10 +23,7 @@ class Shell extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
       ),
-      routes: {
-        '/': (_) => BooksScreen(),
-        '/cart': (_) => CartScreen(),
-      },
+      routes: {'/': (_) => BooksScreen(), '/cart': (_) => CartScreen()},
     );
   }
 }

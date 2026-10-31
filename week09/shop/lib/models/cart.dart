@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import 'book.dart';
 
 class Cart extends ChangeNotifier {
@@ -6,7 +7,10 @@ class Cart extends ChangeNotifier {
 
   List<Book> get items => _qty.keys.toList();
   int get count => _qty.length;
-  int get total => _qty.entries.fold(0, (sum, entry) => sum + (entry.key.price * entry.value));
+  int get total => _qty.entries.fold(
+    0,
+    (sum, entry) => sum + (entry.key.price * entry.value),
+  );
 
   int qtyOf(Book book) => _qty[book] ?? 0;
 
