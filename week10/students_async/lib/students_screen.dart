@@ -4,6 +4,7 @@ import 'api/fake_api.dart';
 import 'widgets/error_view.dart';
 import 'widgets/loading_view.dart';
 import 'widgets/empty_view.dart';
+import 'widgets/student_list.dart';
 
 class StudentsScreen extends StatefulWidget {
   const StudentsScreen({super.key});
@@ -63,17 +64,10 @@ class _StudentsScreenState extends State<StudentsScreen> {
     }
 
     return Scaffold(
-      body: ListView.builder(
-        itemCount: _students!.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            leading: CircleAvatar(
-              child: Text(_students![index].name[0]),
-            ),
-            title: Text(_students![index].name),
-            trailing: Text('GPA: ${_students![index].gpa ?? '-'}'),
-          );
-        },
+      appBar: AppBar(),
+      body: StudentList(
+          list: _students!,
+          compact: false,
       ),
     );
   }

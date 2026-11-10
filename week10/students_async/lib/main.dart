@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'api/fake_api.dart';
 import 'students_screen.dart';
+import 'students_future_screen.dart';
 
 void main() {
   print('A');
@@ -20,7 +21,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: StudentsScreen(),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FilledButton(
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => StudentsScreen())),
+              child: Text('By hand'),
+            ),
+            const SizedBox(height: 8),
+            OutlinedButton(
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => StudentsFutureScreen())),
+              child: Text('FutureBuilder'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
