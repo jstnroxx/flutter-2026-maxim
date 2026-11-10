@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'api/fake_api.dart';
 import 'students_screen.dart';
 import 'students_future_screen.dart';
+import 'countdown_screen.dart';
 
 void main() {
   print('A');
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +42,14 @@ class HomePage extends StatelessWidget {
               child: Text('By hand'),
             ),
             const SizedBox(height: 8),
-            OutlinedButton(
+            FilledButton(
               onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => StudentsFutureScreen())),
               child: Text('FutureBuilder'),
+            ),
+            const SizedBox(height: 8),
+            OutlinedButton(
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => CountdownScreen())),
+              child: Text('Countdown'),
             ),
           ],
         ),
