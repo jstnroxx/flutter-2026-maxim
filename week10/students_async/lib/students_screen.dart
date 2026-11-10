@@ -17,6 +17,8 @@ class _StudentsScreenState extends State<StudentsScreen> {
   List<Student>? _students;
   Object? _error;
 
+  bool _saving = false;
+
   final _api = FakeApi();
 
   Future<void> _load () async {
@@ -65,9 +67,49 @@ class _StudentsScreenState extends State<StudentsScreen> {
 
     return Scaffold(
       appBar: AppBar(),
-      body: StudentList(
-          list: _students!,
-          compact: false,
+      body: Column(
+        children: [
+          Expanded(
+              child: StudentList(
+                list: _students!,
+                compact: false,
+              ),
+          ),
+          const SizedBox(height: 8.0),
+          SafeArea(
+            child: FloatingActionButton(
+              onPressed: _saving ?
+              null
+              : () async {
+                try {
+                  setState(() {
+                    _saving = true;
+                  });
+
+                  await _api.save(_students!.length);
+
+                  if (!context.mounted) return;
+
+                  Navigator.pop(context);
+                } on StateError catch (e) {
+                  if (!context.mounted) return;
+
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
+                } finally {
+                  if (mounted) {
+                    setState(() {
+                      _saving = false;
+                    });
+                  }
+                }
+              },
+              child: _saving ?
+              CircularProgressIndicator()
+              : const Icon(Icons.save),
+            ),
+          ),
+        ],
       ),
     );
   }
