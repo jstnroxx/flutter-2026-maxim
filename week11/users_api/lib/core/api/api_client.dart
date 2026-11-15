@@ -43,7 +43,10 @@ class ApiClient {
 
   void _log(http.Response r) {
     if (kDebugMode) {
-      log('${r.request?.method} ${r.request?.url.path} → ${r.statusCode}', name: 'api');
+      log(
+        '${r.request?.method} ${r.request?.url.path} → ${r.statusCode}',
+        name: 'api',
+      );
     }
   }
 
@@ -52,7 +55,9 @@ class ApiClient {
   Future<dynamic> get(String path) async {
     final Uri uri = Uri.https(host, path);
 
-    final http.Response resp = await _send(() => _client.get(uri, headers: _headers));
+    final http.Response resp = await _send(
+      () => _client.get(uri, headers: _headers),
+    );
     _log(resp);
     _check(resp);
 
@@ -62,12 +67,20 @@ class ApiClient {
   Future<dynamic> post(String path, Map<String, dynamic> body) async {
     final Uri uri = Uri.https(host, path);
 
-    final http.Response resp = await _send(() => _client.post(uri, headers: {..._headers, 'Content-Type': 'application/json'}, body: jsonEncode(body)));
+    final http.Response resp = await _send(
+      () => _client.post(
+        uri,
+        headers: {..._headers, 'Content-Type': 'application/json'},
+        body: jsonEncode(body),
+      ),
+    );
     _log(resp);
     _check(resp);
 
     if (resp.statusCode != 201) {
-      throw BadResponseException('POST $path: expected 201, got ${resp.statusCode}');
+      throw BadResponseException(
+        'POST $path: expected 201, got ${resp.statusCode}',
+      );
     }
 
     return _decode(resp);

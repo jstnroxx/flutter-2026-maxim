@@ -26,4 +26,15 @@ class UsersModel extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<ApiException?> create(User draft) async {
+    try {
+      final User created = await _repo.create(draft);
+      items = [created, ...items];
+      notifyListeners();
+      return null;
+    } on ApiException catch (e) {
+      return e;
+    }
+  }
 }

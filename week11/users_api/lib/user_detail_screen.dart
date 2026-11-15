@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:users_api/features/users/user.dart';
 
@@ -10,9 +9,7 @@ class UserDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('User'),
-      ),
+      appBar: AppBar(title: const Text('User')),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0),

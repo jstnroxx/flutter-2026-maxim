@@ -6,8 +6,8 @@ class Geo {
 
   factory Geo.fromJson(Map<String, dynamic> json) {
     return Geo(
-        lat: double.parse(json['lat'] as String),
-        lng: double.parse(json['lng'] as String),
+      lat: double.parse(json['lat'] as String),
+      lng: double.parse(json['lng'] as String),
     );
   }
 
@@ -24,7 +24,13 @@ class Address {
   final String zipcode;
   final Geo geo;
 
-  const Address({required this.street, required this.suite, required this.city, required this.zipcode, required this.geo});
+  const Address({
+    required this.street,
+    required this.suite,
+    required this.city,
+    required this.zipcode,
+    required this.geo,
+  });
 
   factory Address.fromJson(Map<String, dynamic> json) {
     return Address(
@@ -55,7 +61,16 @@ class User {
   final Address address;
   final ({String name, String catchPhrase}) company;
 
-  const User({required this.id, required this.name, required this.username, required this.email, required this.phone, required this.website, required this.address, required this.company});
+  const User({
+    required this.id,
+    required this.name,
+    required this.username,
+    required this.email,
+    required this.phone,
+    required this.website,
+    required this.address,
+    required this.company,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) {
     final companyJson = json['company'] as Map<String, dynamic>;
@@ -83,18 +98,16 @@ class User {
     'phone': phone,
     'website': website,
     'address': address.toJson(),
-    'company': {
-      'name': company.name,
-      'catchPhrase': company.catchPhrase,
-    },
+    'company': {'name': company.name, 'catchPhrase': company.catchPhrase},
   };
 
-  String get phoneDigits => phone.replaceAll(RegExp(r'[^\d+]'), '').replaceAll(RegExp(r'(?!^)\+'), '');
+  String get phoneDigits => phone
+      .replaceAll(RegExp(r'[^\d+]'), '')
+      .replaceAll(RegExp(r'(?!^)\+'), '');
 
   @override
-  bool operator == (Object other) => other is User && other.id == id;
+  bool operator ==(Object other) => other is User && other.id == id;
 
   @override
   int get hashCode => id.hashCode;
 }
-

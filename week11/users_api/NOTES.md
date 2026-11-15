@@ -13,3 +13,7 @@ in the list.
 When POST to https://jsonplaceholder.typicode.com/users, the
 server doesn't actually require anything, and returns a successful response
 of status 201 "Created" with the following body: "{id: 11}".
+
+# Level 5
+A request sent from wifi with no internet connection gets a
+timeout after 10 seconds, because it was specified so in the ApiClient.

@@ -13,7 +13,9 @@ class UserRepository {
     try {
       final List<dynamic> list = body as List<dynamic>;
 
-      return list.map((dynamic entry) => User.fromJson(entry as Map<String, dynamic>)).toList();
+      return list
+          .map((dynamic entry) => User.fromJson(entry as Map<String, dynamic>))
+          .toList();
     } on TypeError catch (e) {
       throw BadResponseException('users: $e');
     }
