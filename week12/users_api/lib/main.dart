@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:users_api/core/api/api_client.dart';
 import 'package:users_api/features/users/user_repository.dart';
 import 'package:users_api/users_model.dart';
+import 'package:users_api/settings_model.dart';
 
 import 'users_screen.dart';
 
@@ -29,7 +30,6 @@ Future<void> main() async {
   ));
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -37,7 +37,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Users API',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.indigo, brightness: Brightness.light)),
+      darkTheme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.indigo, brightness: Brightness.dark)),
+      themeMode: context.watch<SettingsModel>().dark ? ThemeMode.dark : ThemeMode.light,
       home: UsersScreen(),
     );
   }

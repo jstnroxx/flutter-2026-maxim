@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:users_api/core/api/api_exception.dart';
+import 'package:users_api/settings_model.dart';
 import 'package:users_api/users_model.dart';
 
+import 'features/users/user.dart';
 import 'user_detail_screen.dart';
 import 'new_user_screen.dart';
+import 'settings_screen.dart';
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({super.key});
 
-  Widget _buildBody(BuildContext context, UsersModel m) {
+  Widget _buildBody(BuildContext context, UsersModel m, String? city) {
     if (m.loading) {
       return const Center(child: CircularProgressIndicator());
     }
+
+    final List<User> visible = city == null ? m.items : m.items.where((user) => user.address.city == city).toList();
 
     return switch (m.error) {
       null => RefreshIndicator(
@@ -21,21 +26,21 @@ class UsersScreen extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.separated(
-                itemCount: m.items.length,
+                itemCount: visible.length,
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (_) => UserDetailScreen(user: m.items[index]),
+                        builder: (_) => UserDetailScreen(user: visible[index]),
                       ),
                     ),
                     child: ListTile(
                       leading: CircleAvatar(
-                        child: Text(m.items[index].name[0]),
+                        child: Text(visible[index].name[0]),
                       ),
-                      title: Text(m.items[index].name),
-                      subtitle: Text(m.items[index].address.city),
-                      trailing: Text(m.items[index].email),
+                      title: Text(visible[index].name),
+                      subtitle: Text(visible[index].address.city),
+                      trailing: Text(visible[index].email),
                     ),
                   );
                 },
@@ -84,12 +89,24 @@ class UsersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UsersModel m = context.watch<UsersModel>();
+    final String? city = context.watch<SettingsModel>().city;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Users')),
+      appBar: AppBar(
+        title: const Text('Users'),
+        actionsPadding: const EdgeInsets.all(8.0),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => SettingsScreen()));
+            },
+            icon: const Icon(Icons.settings),
+          ),
+        ],
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
-        child: _buildBody(context, m),
+        child: _buildBody(context, m, city),
       ),
     );
   }
