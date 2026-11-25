@@ -38,6 +38,7 @@ Future<void> main() async {
         create: (_) => AuthModel(store, signedIn: token != null),
       ),
       Provider<SecureStore>.value(value: store),
+      Provider<SharedPreferencesAsync>.value(value: prefs),
     ],
     child: const MyApp(),
   ));

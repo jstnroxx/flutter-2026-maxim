@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:users_api/features/users/user.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'core/storage/secure_store.dart';
 
@@ -10,6 +11,16 @@ class UserDetailScreen extends StatelessWidget {
   final User user;
 
   const UserDetailScreen({super.key, required this.user});
+
+  Future<void> _open(BuildContext context, Uri uri) async {
+    final bool opened = await launchUrl(uri);
+
+    if (!opened && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No app can open this')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +51,23 @@ class UserDetailScreen extends StatelessWidget {
                 ListTile(
                   leading: const Text('Phone number'),
                   trailing: Text(user.phone),
+                  onTap: () => _open(context, Uri(scheme: 'tel', path: user.phoneDigits)),
                 ),
                 const Divider(),
                 ListTile(
                   leading: const Text('Email'),
                   trailing: Text(user.email),
+                  onTap: () => _open(context, Uri(scheme: 'mailto', path: user.email)),
                 ),
                 const Divider(),
+                if (user.website != null) ...[
+                  ListTile(
+                    leading: const Text('Website'),
+                    trailing: Text(user.website!),
+                    onTap: () => _open(context, Uri.parse('https://${user.website}')),
+                  ),
+                  const Divider(),
+                ],
                 if (kDebugMode)
                   OutlinedButton(
                     onPressed: () async {

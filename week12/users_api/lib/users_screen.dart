@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:users_api/core/api/api_exception.dart';
+import 'package:users_api/profile_screen.dart';
 import 'package:users_api/settings_model.dart';
 import 'package:users_api/users_model.dart';
 
@@ -96,6 +97,12 @@ class UsersScreen extends StatelessWidget {
         title: const Text('Users'),
         actionsPadding: const EdgeInsets.all(8.0),
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => ProfileScreen()));
+            },
+            icon: const Icon(Icons.person),
+          ),
           IconButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (_) => SettingsScreen()));

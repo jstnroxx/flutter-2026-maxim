@@ -30,3 +30,7 @@ signed in.
 In Android, after the lock screen is removed the keys protecting the data can
 be invalidated when the screen lock is removed or changed, so the stored token
 becomes unreadable and the user is signed out unexpectedly.
+
+# Level 5
+In iOS it is enough to decline permission one time for it to
+recieve permanentlyDenied state.
