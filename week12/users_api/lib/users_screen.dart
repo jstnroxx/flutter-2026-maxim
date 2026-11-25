@@ -104,9 +104,20 @@ class UsersScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: _buildBody(context, m, city),
+      body: Column(
+        children: [
+          if (m.fromCache)
+            MaterialBanner(
+              content: const Text('Saved data'),
+              actions: [TextButton(onPressed: m.load, child: const Text('Retry'))],
+            ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: _buildBody(context, m, city),
+            ),
+          ),
+        ],
       ),
     );
   }

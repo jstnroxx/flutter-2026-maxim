@@ -8,6 +8,7 @@ import 'package:users_api/features/users/user_repository.dart';
 import 'package:users_api/users_model.dart';
 import 'package:users_api/settings_model.dart';
 import 'core/storage/secure_store.dart';
+import 'features/users/users_cache.dart';
 
 import 'login_screen.dart';
 import 'users_screen.dart';
@@ -23,6 +24,7 @@ Future<void> main() async {
   final token = await store.readToken();
 
   final api = ApiClient(http.Client(), store);
+  final cache = UsersCache();
 
   runApp(MultiProvider(
     providers: [
@@ -30,7 +32,7 @@ Future<void> main() async {
         create: (_) => SettingsModel(prefs, dark: dark, city: city),
       ),
       ChangeNotifierProvider(
-        create: (_) => UsersModel(UserRepository(api))..load(),
+        create: (_) => UsersModel(UserRepository(api, cache))..load(),
       ),
       ChangeNotifierProvider(
         create: (_) => AuthModel(store, signedIn: token != null),

@@ -3,12 +3,15 @@ import 'package:users_api/core/api/api_exception.dart';
 import 'package:users_api/features/users/user.dart';
 import 'package:users_api/features/users/user_repository.dart';
 
+typedef UsersResult = ({List<User> items, bool fromCache});
+
 class UsersModel extends ChangeNotifier {
   final UserRepository _repo;
 
   List<User> items = const [];
   ApiException? error;
   bool loading = false;
+  bool fromCache = false;
 
   UsersModel(this._repo);
 
@@ -18,7 +21,10 @@ class UsersModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      items = await _repo.getAll();
+      final UsersResult result = await _repo.getAll();
+
+      items = result.items;
+      fromCache = result.fromCache;
     } on ApiException catch (e) {
       error = e;
     } finally {
