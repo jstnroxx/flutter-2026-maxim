@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:users_api/auth_model.dart';
 import 'settings_model.dart';
 import 'users_model.dart';
 
@@ -10,6 +11,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final SettingsModel settings = context.watch<SettingsModel>();
     final UsersModel usr = context.watch<UsersModel>();
+    final AuthModel auth = context.watch<AuthModel>();
 
     final Set<String> cities = usr.items.map((user) => user.address.city).toSet();
     final String? current = cities.contains(settings.city) ? settings.city : null;
@@ -58,6 +60,19 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+              ),
+              const Spacer(),
+              SafeArea(
+                child: OutlinedButton(
+                  onPressed: () async {
+                    await auth.logout();
+
+                    if (!context.mounted) return;
+
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                  },
+                  child: const Text('Logout'),
                 ),
               ),
             ],
